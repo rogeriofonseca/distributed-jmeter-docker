@@ -8,16 +8,18 @@ services:
     ports:
       - "60000"
     volumes:
-      - "./test/:/jmeter/sample/"
+      - "./test/:/jmeter/apache-jmeter-5.0/bin/plan/"
     networks:
       - jmeter-network
   server:
-    image: pedrocesarti/jmeter-docker:latest
+    build: ..
     command: server
     tty: true
     ports:
       - "50000"
       - "1099"
+    volumes:
+      - "./test/:/jmeter/apache-jmeter-5.0/bin/plan/"
     networks:
       - jmeter-network
     depends_on:
